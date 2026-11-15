@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Terra Analog Atlas: Earth sites that match Moon and Mars bases</title>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f6f9;--panel:#fff;--ink:#17212b;--mute:#566574;--line:#d5dce4;--land:#dfe3da;--sea:#e8eff5;--tgt:#0a6b8f;--earth:#b4650a;--nav:#0a2540;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1620;--panel:#132230;--ink:#e6edf2;--mute:#9bacb9;--line:#25384a;--land:#223646;--sea:#0d1b27;--tgt:#56c8e6;--earth:#f0b04a}}
+:root[data-theme="dark"]{--bg:#0b1620;--panel:#132230;--ink:#e6edf2;--mute:#9bacb9;--line:#25384a;--land:#223646;--sea:#0d1b27;--tgt:#56c8e6;--earth:#f0b04a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.6 "Public Sans",system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--nav);z-index:10}
+h1,h2,h3{margin:0;line-height:1.15;font-weight:800;letter-spacing:-.01em}
+a{color:var(--tgt)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--nav);color:#fff}
+.top div{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center}
+.brand{font-weight:800;font-size:18px;margin-right:auto}
+.top a{color:#cfe0f0;text-decoration:none;padding:4px 0;border-bottom:2px solid transparent}
+.top a[aria-current=true]{color:#fff;border-color:#56c8e6}
+.wrap{max-width:1100px;margin:0 auto;padding:22px 16px 48px}
+.hero{background:linear-gradient(160deg,#0a2540,#12456b 70%,#1d5f88);color:#fff;border-radius:12px;padding:clamp(24px,6vw,64px)}
+.hero h1{font-size:clamp(30px,6vw,56px);max-width:18ch}
+.hero p{max-width:60ch;color:#d3e3f2;font-size:17px;margin:14px 0 22px}
+.btn{display:inline-block;background:#f0b04a;color:#2a1a00;font-weight:600;text-decoration:none;border-radius:8px;padding:12px 22px;border:0;font-size:16px;cursor:pointer}
+.btn.o{background:none;color:#fff;border:1px solid #8fb2d0;margin-left:8px}
+h2{font-size:22px;margin:30px 0 10px}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:820px){.cols,.grid{grid-template-columns:1fr!important}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.card h3{font-size:17px;margin-bottom:4px}.card p{margin:0;color:var(--mute)}
+.stp{font-weight:800;color:var(--earth)}
+.pills{display:flex;flex-wrap:wrap;gap:8px}.grp{font-size:13px;font-weight:600;color:var(--mute);margin:12px 0 6px}
+button{font:inherit;color:inherit;cursor:pointer}
+.pill{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:7px 14px}
+.pill[aria-pressed=true]{background:var(--tgt);border-color:var(--tgt);color:#fff;font-weight:600}
+.msg{background:var(--panel);border-left:4px solid var(--tgt);padding:10px 14px;margin:10px 0;border-radius:0 8px 8px 0;color:var(--mute)}
+.msg b{color:var(--ink)}
+.grid{display:grid;grid-template-columns:1.5fr 1fr;gap:14px;align-items:start}
+.mapbox{overflow-x:auto}svg{display:block;width:100%;height:auto;min-width:520px;background:var(--sea);border-radius:6px}
+.land{fill:var(--land);stroke:var(--line);stroke-width:.6}.dot{cursor:pointer;stroke:var(--panel);stroke-width:1.5}.dot:focus{outline:2px solid var(--ink)}
+.lbl{font-size:9px;fill:var(--ink);pointer-events:none;font-weight:600}
+.rank{list-style:none;margin:0;padding:0;max-height:440px;overflow:auto}
+.row{width:100%;text-align:left;display:flex;align-items:center;gap:10px;padding:8px;border:1px solid transparent;border-radius:8px;background:none}
+.row:hover{background:var(--bg)}.row[aria-pressed=true]{border-color:var(--earth);background:var(--bg)}
+.sc{min-width:50px;font-weight:800;font-size:18px;color:var(--earth)}.rn{flex:1}.rn small{display:block;color:var(--mute)}
+.leg{display:flex;flex-wrap:wrap;gap:16px;color:var(--mute);font-size:13px;margin:6px 0 10px}.sw{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px}
+.f{display:grid;grid-template-columns:160px 1fr 44px;gap:10px;align-items:center;margin:7px 0;font-size:14px}
+@media(max-width:560px){.f{grid-template-columns:110px 1fr 40px;font-size:13px}}
+.bars{display:grid;gap:3px}.b{height:7px;border-radius:4px;background:var(--line);overflow:hidden}.b i{display:block;height:100%}.d{text-align:right;color:var(--mute)}
+.sl{display:grid;grid-template-columns:160px 1fr 28px;gap:10px;align-items:center;margin:5px 0;font-size:14px}.sl input{width:100%;accent-color:var(--tgt)}
+.rel{background:var(--bg);border-radius:8px;padding:10px 12px;margin-top:12px}.rel p{margin:4px 0 0;color:var(--mute)}
+.note{color:var(--mute);font-size:13px}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{background:var(--panel)}
+footer{margin-top:34px;color:var(--mute);font-size:13px;border-top:1px solid var(--line);padding-top:14px}
+</style></head><body>
+<header class="top"><div><span class="brand">Terra Analog Atlas</span><nav style="display:contents"><a href="#home">Home</a><a href="#atlas">Atlas</a><a href="#data">Data and sources</a></nav></div></header>
+<main class="wrap">
+
+<section data-v="home">
+<div class="hero"><h1>Train on Earth. Settle on the Moon and Mars.</h1>
+<p>Before anyone builds a base on the Moon or Mars, rovers, habitats and crews are tested at places on Earth that look and feel like them. Terra Analog Atlas shows which Earth places are the closest match to each planned lunar base region and Mars site, and explains why.</p>
+<a class="btn" href="#atlas">Open the Atlas</a><a class="btn o" href="#data">See the data</a></div>
+<h2>How to use the Atlas</h2>
+<div class="cols">
+<div class="card"><h3><span class="stp">Step 1.</span> Pick a target</h3><p>Choose a Moon base region (NASA’s Artemis candidates) or a Mars site.</p></div>
+<div class="card"><h3><span class="stp">Step 2.</span> See the best Earth matches</h3><p>The map and list rank 15 Earth analog sites from best to weakest match.</p></div>
+<div class="card"><h3><span class="stp">Step 3.</span> Compare and learn</h3><p>Open any site to see feature-by-feature bars and how it relates to the Moon or Mars.</p></div></div>
+<h2>Why analog sites matter</h2>
+<div class="cols">
+<div class="card"><h3>Moon</h3><p>NASA named 13 candidate regions within 6° of the lunar south pole for Artemis III, chosen using Lunar Reconnaissance Orbiter data. Cold, ice-bearing polar terrain is best rehearsed in places like Antarctica and the Arctic.</p></div>
+<div class="card"><h3>Mars</h3><p>Mars has about 38% of Earth’s gravity, an atmosphere under 1% as thick, and basaltic, dusty, salty soils. Dry, high or volcanic deserts on Earth reproduce parts of that.</p></div>
+<div class="card"><h3>Earth analogs</h3><p>No Earth site copies everything. Each one matches some conditions, so the Atlas scores nine features and lets you choose what matters most.</p></div></div>
+<footer>Student hackathon project for the NASA Space Apps Challenge. It uses public NASA data and is not an official NASA website.</footer>
+</section>
+
+<section data-v="atlas" hidden>
+<h2 style="margin-top:6px">Find the best Earth analog</h2>
+<div class="msg"><b>Start here:</b> choose a Moon or Mars target below. The map, ranking and comparison update at once.</div>
+<div class="grp">Moon: NASA Artemis III candidate regions, plus a lava-tube site</div><div class="pills" id="moon"></div>
+<div class="grp">Mars: landing and exploration-zone sites</div><div class="pills" id="mars"></div>
+<div class="msg" id="tinfo"></div>
+<h2>Best Earth matches</h2>
+<div class="msg"><b>Reading the map:</b> bigger, brighter dots are better matches. Select a dot or a list item to compare it below.</div>
+<div class="grid"><div class="card mapbox"><svg id="map" viewBox="0 0 792 396" role="img" aria-label="World map of Earth analog sites"></svg></div>
+<div class="card"><ol class="rank" id="rank"></ol></div></div>
+<details class="card" style="margin-top:12px"><summary><b>Optional:</b> change what matters most</summary>
+<p class="note">Drag a slider to 0 to ignore a feature or to 3 to count it triple. The ranking updates immediately.</p><div id="sliders"></div></details>
+<h2>Side-by-side comparison</h2><div class="card" id="cmp"></div>
+</section>
+
+<section data-v="data" hidden>
+<h2 style="margin-top:6px">Planet baseline: Earth, Moon and Mars</h2>
+<div class="tw card"><table><tr><th>Property</th><th>Earth</th><th>Moon</th><th>Mars</th></tr>
+<tr><td>Surface gravity</td><td>9.80 m/s²</td><td>1.62 m/s² (0.17 g)</td><td>3.71 m/s² (0.38 g)</td></tr>
+<tr><td>Surface pressure</td><td>101.3 kPa</td><td>Near-vacuum (about 3×10⁻¹⁵ bar)</td><td>About 0.6 kPa (6.36 mb mean, 4.0 to 8.7 mb by season)</td></tr>
+<tr><td>Surface temperature</td><td>Global mean about 15 °C</td><td>Equator about −173 to +117 °C (100 to 390 K); permanently shadowed craters below −220 °C</td><td>Mean about −65 °C (210 K); range about −140 to +20 °C</td></tr>
+<tr><td>Day length</td><td>24 h</td><td>29.5 Earth days</td><td>24 h 37 min</td></tr></table></div>
+<p class="note">Sources: NASA NSSDC Planetary Fact Sheets (Mars, Moon, Earth) and LRO Diviner polar temperature results. Values rounded.</p>
+<h2>Datasets and where they come from</h2>
+<div class="tw card"><table id="dtab"></table></div>
+<h2>Method</h2>
+<div class="card"><p>Each place gets nine features scored from 0 to 1: coldness, day–night temperature swing, terrain roughness, dryness, basaltic rock, ice presence, low air pressure, UV or radiation exposure, and fine dust. Similarity = 100 × (1 − weighted distance) between the target and the Earth site, using your slider weights.</p>
+<p style="margin-top:8px"><b>Honest limits:</b> the planetary numbers above are published NASA values. The 0 to 1 feature scores for individual sites were estimated by our team from the NASA, USGS and field-study sources listed and are not pixel-by-pixel measurements. Treat the ranking as a shortlist guide. No Earth site can reproduce low gravity, vacuum or deep-space radiation.</p>
+<p style="margin-top:8px"><b>Not official:</b> this project uses public NASA data but is not made or endorsed by NASA.</p></div>
+</section>
+</main>
+
+<script>
+var F=["Coldness","Day–night temp swing","Terrain roughness","Dryness","Basaltic rock","Ice presence","Low air pressure","UV / radiation","Fine dust"];
+var T=[
+{b:"moon",n:"Connecting Ridge",d:"Ridge linking Shackleton and de Gerlache craters at the south pole. NASA lists it and an extension as Artemis III regions; parts stay sunlit for long periods next to permanently shadowed ground.",v:[.8,.4,.6,1,.2,.7,1,1,1]},
+{b:"moon",n:"Malapert Massif",d:"Mountain near the south pole with long sunlight and a good radio view of Earth. NASA Artemis III candidate region.",v:[.6,.8,.6,1,.2,.4,1,1,1]},
+{b:"moon",n:"Haworth",d:"South polar crater whose floor is in permanent shadow, where water ice is expected. NASA Artemis III candidate region.",v:[.9,.3,.6,1,.2,.9,1,1,1]},
+{b:"moon",n:"Nobile Rim 1",d:"Rim of Nobile crater near the pole, a region studied for ice mapping. NASA Artemis III candidate region.",v:[.85,.4,.6,1,.2,.7,1,1,1]},
+{b:"moon",n:"Faustini Rim A",d:"Rim of Faustini crater, a very cold polar crater with permanently shadowed floor. NASA Artemis III candidate region.",v:[.9,.4,.5,1,.2,.8,1,1,1]},
+{b:"moon",n:"Leibnitz Beta Plateau",d:"Elevated plateau near the south pole with some of the Moon’s oldest terrain. NASA Artemis III candidate region.",v:[.7,.6,.5,1,.2,.4,1,1,1]},
+{b:"moon",n:"Marius Hills pit",d:"Volcanic dome field with a skylight pit seen by LRO. The lava tube below could shelter crews from radiation and temperature swings.",v:[.4,1,.5,1,1,.1,1,1,1]},
+{b:"mars",n:"Jezero Crater",d:"About 18°N, 77°E. Ancient river delta explored by the Perseverance rover since February 2021.",v:[.5,.6,.5,1,.9,.2,.9,.7,.8]},
+{b:"mars",n:"Gale Crater",d:"About 5°S, 138°E. Home of Curiosity and a mountain of layered sediment that records Mars’ wetter past.",v:[.5,.6,.7,1,.8,.3,.9,.7,.8]},
+{b:"mars",n:"Arcadia Planitia",d:"About 47°N. Flat northern plain with shallow subsurface ice, a leading human-landing candidate.",v:[.6,.6,.1,1,.7,.8,.9,.7,.9]},
+{b:"mars",n:"Utopia Planitia",d:"About 50°N. Huge northern plain with buried ice detected by orbiting radar; visited by Viking 2 and Tianwen-1 in the area.",v:[.65,.6,.1,1,.7,.85,.9,.7,.9]},
+{b:"mars",n:"Hellas Planitia",d:"About 42°S. Deepest basin on Mars, so air pressure is nearly double the Mars average.",v:[.55,.7,.3,1,.7,.3,.5,.5,.8]},
+{b:"mars",n:"Deuteronilus Mensae",d:"About 44°N. Mesas with glacier-like ice deposits, studied as a place with both ice and rock.",v:[.7,.6,.7,1,.6,.9,.9,.7,.8]},
+{b:"mars",n:"Meridiani Planum",d:"Near the equator. Flat, hematite-rich plain explored by the Opportunity rover from 2004 to 2018.",v:[.45,.7,.1,1,.8,.2,.9,.7,.9]}];
+var S=[
+{n:"Atacama Desert",c:"Chile",la:-24.5,lo:-69.2,v:[.1,.5,.3,1,.4,0,.4,.9,.8],r:"One of the driest places on Earth. NASA-funded teams have tested Mars drills and life-detection tools here."},
+{n:"Devon Island",c:"Canada",la:75.4,lo:-89,v:[.8,.3,.4,.7,.1,.8,0,.3,.5],r:"Polar desert with an impact crater. The Haughton-Mars Project, with NASA support, rehearses Moon and Mars crew work here."},
+{n:"Mauna Kea",c:"Hawaii, USA",la:19.8,lo:-155.5,v:[.5,.5,.6,.8,1,.2,.6,.9,.7],r:"Volcanic cinder and ash slopes used to test rovers and lunar soil tools, including the PISCES programme."},
+{n:"Antarctic Dry Valleys",c:"Antarctica",la:-77.5,lo:162.5,v:[1,.3,.6,1,.5,.9,.2,.6,.7],r:"The coldest, driest ice-free land on Earth, with ground ice under dry soil like Mars’ mid-latitudes. A NASA Mars analog since the Viking era."},
+{n:"Mars Desert Research Station",c:"Utah, USA",la:38.4,lo:-110.8,v:[.2,.6,.4,.8,.1,0,.2,.6,.7],r:"Red, sulfate-rich desert where the Mars Society runs crew simulation missions in a habitat."},
+{n:"Iceland Highlands",c:"Iceland",la:64.7,lo:-18.5,v:[.6,.2,.6,.4,1,.6,.1,.3,.6],r:"Apollo astronauts trained in Iceland’s volcanic highlands in the 1960s. Basalt, lava fields and glaciers match Moon and Mars terrain."},
+{n:"Rio Tinto",c:"Spain",la:37.7,lo:-6.6,v:[0,.3,.3,.4,.3,0,0,.4,.3],r:"Acidic, iron- and sulfate-rich river site of NASA’s MARTE project to test Mars drilling and life searches."},
+{n:"Danakil Depression",c:"Ethiopia",la:14.2,lo:40.3,v:[0,.3,.3,.9,.9,0,0,.7,.6],r:"Hot basalt and salt basin used to study Mars-like volcanic and mineral-rich environments."},
+{n:"Ladakh (Changthang)",c:"India",la:33.5,lo:78,v:[.6,.8,.6,.9,.2,.4,.7,.9,.7],r:"Cold, high, dry plateau with thin air, large day–night swings and strong UV, studied in India as a Mars and Moon analog."},
+{n:"Lonar Crater",c:"India",la:19.98,lo:76.5,v:[0,.3,.3,.4,1,0,0,.5,.4],r:"One of few impact craters formed in basalt on Earth, compared with basaltic craters on Mars and the Moon."},
+{n:"Craters of the Moon",c:"Idaho, USA",la:43.4,lo:-113.5,v:[.4,.6,.5,.6,1,.1,.3,.5,.6],r:"Lava fields where Apollo 14 astronauts trained in 1969 for lunar geology."},
+{n:"Teide volcano",c:"Tenerife, Spain",la:28.27,lo:-16.64,v:[.3,.6,.7,.7,1,0,.5,.8,.6],r:"Basalt and pumice terrain at altitude, used for rover and instrument field tests."},
+{n:"Salar de Uyuni",c:"Bolivia",la:-20.2,lo:-67.5,v:[.3,.7,0,.9,.3,0,.6,1,.6],r:"Very flat, high-UV salt flat at about 3,650 m. Good for rover mobility and Mars salt-mineral studies."},
+{n:"Death Valley",c:"California, USA",la:36.2,lo:-116.8,v:[0,.6,.7,1,.3,0,0,.6,.6],r:"Hot, dry, rocky desert with alluvial fans and salt flats, used for Mars geology field training."},
+{n:"Svalbard",c:"Norway",la:78.2,lo:15.6,v:[.8,.2,.6,.6,.4,.7,0,.3,.5],r:"NASA-funded AMASE expeditions (2003 to 2011) tested rovers and life-detection instruments in this cold basalt and carbonate terrain."}];
+var D=[["LRO LOLA laser altimeter","NASA GSFC","Moon elevation and slope for landing safety","https://lunar.gsfc.nasa.gov/lola.html"],
+["LRO Diviner radiometer","NASA / UCLA","Moon surface temperatures, polar cold traps","https://diviner.ucla.edu"],
+["LROC camera images","NASA / Arizona State Univ.","Moon terrain and boulders","https://www.lroc.asu.edu"],
+["Moon Mineralogy Mapper (M3)","NASA JPL / ISRO","Water signs on the Moon","https://m3.jpl.nasa.gov"],
+["Artemis III candidate regions","NASA","The 13 lunar south-pole regions used for Moon targets","https://www.nasa.gov/news-release/nasa-identifies-candidate-regions-for-landing-next-americans-on-Moon/"],
+["Mars Global Surveyor MOLA","NASA PDS Geosciences","Mars elevation and slope","https://pds-geosciences.wustl.edu/missions/mgs/mola.html"],
+["MRO HiRISE images","NASA / Univ. of Arizona","Mars terrain and rocks","https://www.uahirise.org"],
+["MRO CRISM spectrometer","NASA / JHU APL","Mars minerals such as clays and sulfates","http://crism.jhuapl.edu"],
+["NASA Planetary Fact Sheets","NASA NSSDC","Gravity, pressure and temperature baselines","https://nssdc.gsfc.nasa.gov/planetary/factsheet/"],
+["Moon Trek and Mars Trek","NASA JPL","Browse and download lunar and Martian map layers","https://trek.nasa.gov"],
+["NASA POWER climate data","NASA Langley","Earth temperature and climate","https://power.larc.nasa.gov"],
+["MODIS land surface temperature","NASA","Earth surface temperature","https://modis.gsfc.nasa.gov"],
+["NASA Earthdata (SRTM elevation)","NASA","Earth elevation, air pressure and relief","https://www.earthdata.nasa.gov"],
+["Planetary Data System","NASA","Archive for Moon and Mars mission data","https://pds.nasa.gov"],
+["USGS Astrogeology Science Center","USGS","Planetary maps and geology","https://astrogeology.usgs.gov"]];
+var LAND=[[[-168,66],[-140,70],[-95,72],[-80,72],[-62,60],[-55,50],[-70,42],[-76,35],[-81,25],[-97,26],[-105,22],[-95,16],[-85,10],[-78,8],[-90,14],[-105,20],[-115,30],[-125,40],[-125,49],[-140,58],[-165,60]],
+[[-78,8],[-60,10],[-50,0],[-35,-6],[-40,-22],[-58,-38],[-66,-55],[-73,-50],[-72,-30],[-70,-18],[-81,-6]],
+[[-10,36],[-9,43],[0,50],[10,55],[28,70],[70,73],[110,77],[180,68],[170,60],[140,50],[130,35],[122,30],[120,22],[108,10],[100,1],[98,15],[90,22],[80,8],[73,20],[60,25],[50,30],[36,36],[28,40],[10,44],[-5,36]],
+[[-17,21],[-10,35],[10,37],[32,31],[43,12],[51,11],[40,-15],[33,-27],[20,-35],[12,-17],[9,4],[-8,5],[-17,14]],
+[[114,-22],[130,-12],[142,-11],[153,-27],[146,-39],[135,-34],[115,-34]],
+[[-55,60],[-20,70],[-20,82],[-60,82],[-70,76]],[[-24,64],[-14,64],[-14,66],[-24,66]],[[-180,-70],[180,-70],[180,-90],[-180,-90]]];
+var W=F.map(function(){return 1}),tgt=T[0],sel=null,ranked=[];
+var $=function(i){return document.getElementById(i)};
+function px(lo,la){return [(lo+180)*2.2,(90-la)*2.2]}
+function score(t,s){var a=0,w=0;for(var i=0;i<F.length;i++){a+=W[i]*Math.pow(t.v[i]-s.v[i],2);w+=W[i]}return w?Math.round(100*(1-Math.sqrt(a/w))):0}
+function pills(){["moon","mars"].forEach(function(b){$(b).innerHTML="";T.filter(function(t){return t.b==b}).forEach(function(t){var e=document.createElement("button");e.className="pill";e.textContent=t.n;e.setAttribute("aria-pressed",t==tgt);e.onclick=function(){tgt=t;update()};$(b).appendChild(e)})})}
+function update(){pills();var m=tgt.b=="moon"?"Moon":"Mars";
+$("tinfo").innerHTML="<b>Selected: "+tgt.n+" ("+m+").</b> "+tgt.d;
+ranked=S.map(function(s){return {s:s,k:score(tgt,s)}}).sort(function(a,b){return b.k-a.k});sel=ranked[0].s;draw()}
+function draw(){drawMap();drawRank();drawCmp()}
+function drawMap(){var h=LAND.map(function(p){return '<polygon class="land" points="'+p.map(function(c){return px(c[0],c[1]).join(",")}).join(" ")+'"/>'}).join("");
+var hi=ranked[0].k,lo=ranked[ranked.length-1].k;
+ranked.slice().reverse().forEach(function(r){var p=px(r.s.lo,r.s.la),t=hi>lo?(r.k-lo)/(hi-lo):1,rad=4+t*7,idx=ranked.indexOf(r),on=r.s==sel;
+h+='<circle class="dot" tabindex="0" role="button" aria-label="'+r.s.n+' match '+r.k+' percent" data-n="'+r.s.n+'" cx="'+p[0]+'" cy="'+p[1]+'" r="'+(on?rad+3:rad)+'" fill="var(--earth)" fill-opacity="'+(.35+.65*t)+'"><title>'+r.s.n+": "+r.k+'%</title></circle>';
+if(idx<3||on)h+='<text class="lbl" x="'+(p[0]+rad+3)+'" y="'+(p[1]+3)+'">'+r.s.n+'</text>'});
+$("map").innerHTML=h;$("map").querySelectorAll(".dot").forEach(function(d){var go=function(){sel=S.filter(function(s){return s.n==d.dataset.n})[0];draw()};d.onclick=go;d.onkeydown=function(e){if(e.key=="Enter"||e.key==" "){e.preventDefault();go()}}})}
+function drawRank(){$("rank").innerHTML="";ranked.forEach(function(r,i){var li=document.createElement("li"),b=document.createElement("button");b.className="row";b.setAttribute("aria-pressed",r.s==sel);
+b.innerHTML='<span class="sc">'+r.k+'%</span><span class="rn">'+(i+1)+". "+r.s.n+"<small>"+r.s.c+"</small></span>";b.onclick=function(){sel=r.s;draw()};li.appendChild(b);$("rank").appendChild(li)})}
+function drawCmp(){var k=score(tgt,sel),m=tgt.b=="moon"?"Moon":"Mars";
+var rows=F.map(function(f,i){return {i:i,d:Math.abs(tgt.v[i]-sel.v[i])}});
+var best=rows.filter(function(r){return W[r.i]>0}).sort(function(a,b){return a.d-b.d}).slice(0,3).map(function(r){return F[r.i].toLowerCase()});
+var gap=rows.slice().sort(function(a,b){return b.d-a.d}).slice(0,2).map(function(r){return F[r.i].toLowerCase()});
+var h='<h3 style="font-size:22px">'+sel.n+' <span style="color:var(--earth)">'+k+'% match</span></h3><div class="note">'+sel.c+' compared with '+tgt.n+' ('+m+')</div>'+
+'<div class="leg"><span><i class="sw" style="background:var(--tgt)"></i>'+tgt.n+'</span><span><i class="sw" style="background:var(--earth)"></i>'+sel.n+'</span><span>Right column: Earth minus target, in points</span></div>';
+F.forEach(function(f,i){var df=Math.round((sel.v[i]-tgt.v[i])*100);h+='<div class="f"><span>'+f+'</span><span class="bars"><span class="b"><i style="width:'+tgt.v[i]*100+'%;background:var(--tgt)"></i></span><span class="b"><i style="width:'+sel.v[i]*100+'%;background:var(--earth)"></i></span></span><span class="d">'+(df>0?"+":"")+df+'</span></div>'});
+h+='<div class="rel"><b>How '+sel.n+' relates to the '+m+'</b><p>'+sel.r+'</p><p><b>Closest on:</b> '+best.join(", ")+'. <b>Biggest gaps:</b> '+gap.join(" and ")+'. Gravity, vacuum and deep-space radiation cannot be matched on Earth.</p></div>';
+$("cmp").innerHTML=h}
+$("sliders").innerHTML=F.map(function(f,i){return '<label class="sl"><span>'+f+'</span><input type="range" min="0" max="3" step="0.5" value="1" data-i="'+i+'"><span id="w'+i+'">1</span></label>'}).join("");
+$("sliders").oninput=function(e){var i=e.target.dataset.i;if(i==null)return;W[i]=+e.target.value;$("w"+i).textContent=e.target.value;var k=sel;ranked=S.map(function(s){return {s:s,k:score(tgt,s)}}).sort(function(a,b){return b.k-a.k});sel=k;draw()};
+$("dtab").innerHTML="<tr><th>Dataset</th><th>Provider</th><th>Used for</th></tr>"+D.map(function(d){return '<tr><td><a href="'+d[3]+'" target="_blank" rel="noopener">'+d[0]+'</a></td><td>'+d[1]+'</td><td>'+d[2]+'</td></tr>'}).join("");
+function route(){var h=(location.hash||"#home").slice(1);if(["home","atlas","data"].indexOf(h)<0)h="home";document.querySelectorAll("[data-v]").forEach(function(s){s.hidden=s.dataset.v!=h});document.querySelectorAll(".top a").forEach(function(a){a.setAttribute("aria-current",a.getAttribute("href")=="#"+h)});window.scrollTo(0,0)}
+window.onhashchange=route;update();route();
+</script></body></html>
